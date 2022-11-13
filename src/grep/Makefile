@@ -10,7 +10,7 @@ python:
 	python3 ../../materials/linters/cpplint.py --extensions=c s21_grep.c s21_grep.h
 
 leaks: 
-	leaks -atExit -- ./s21_grep
+	leaks -atExit -- ./s21_grep -i R test_6_grep.txt
 
 clean:
 	rm -rf s21_grep

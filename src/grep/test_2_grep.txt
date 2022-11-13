@@ -1,14 +1,25 @@
-// Ф-я добавляет str2 в конец str1 (конкатенация)
-char *s21_strcat(char *str1, const char *str2) {
-    int s1 = s21_strlen(str1);
-    int s2 = s21_strlen(str2);
-    char *new_str = calloc((s1 + s2), sizeof(char));
-    int i;
-    for (i = 0; i < s1; i++)
-        new_str[i] = str1[i];
-    for (i = (s1); i < (s1 + s2); i++)
-        new_str[i] = str2[i - s1];
-    str1 = new_str;
-    free(new_str);
-    return str1;
+void flagF() {
+  FILE *file = NULL;
+  char buffer[BUFFERSIZE] = {0};
+  if ((file = fopen(optarg, "r"))) {
+    while (fgets(buffer, BUFFERSIZE, file) != NULL) {
+      if (buffer[strlen(buffer) - 1] == '\n') {  // количество символов в buffer
+        buffer[strlen(buffer) - 1] = 0;
+      }
+      if (lines.eCount > 0) {
+        strcat(pattern, "|");
+      }
+      if (*buffer == '\0') {
+        lines.emptyLines = 1;
+        strcat(pattern, ".");
+      } else {
+        strcat(pattern, buffer);
+      }
+      ++lines.eCount;
+    }
+    fclose(file);
+  } else {
+    printf("File not found\n");
+    exit(1);
+  }
 }

@@ -8,8 +8,10 @@
 #include <string.h>
 
 #define BUFFERSIZE 2048
+#define ON 1
+#define OFF 0
 
-static char pattern[BUFFERSIZE] = {0};
+char pattern[BUFFERSIZE] = {OFF};
 
 void parser(int argc, char* argv[]);
 void reader(int argc, char* argv[]);
@@ -24,34 +26,26 @@ struct lines {
   int eCount;
 } lines;
 
-struct option flags[] = {
-    {"e", no_argument, 0, 'e'}, {"i", no_argument, 0, 'i'},
-    {"v", no_argument, 0, 'v'}, {"c", no_argument, 0, 'c'},
-    {"l", no_argument, 0, 'l'}, {"n", no_argument, 0, 'n'},
-    {"h", no_argument, 0, 'h'}, {"s", no_argument, 0, 's'},
-    {"f", no_argument, 0, 'f'}, {"o", no_argument, 0, 'o'},
-};
-
 struct flag {
-  int e, i, v, c, l, n, h, s, f, o, anyFlags;
+  int e, i, v, c, l, n, h, s, f, o;
 } flag;
 
-void OffOptions() {  // зануляем значения
-  flag.e = 0;
-  flag.i = 0;
-  flag.v = 0;
-  flag.c = 0;
-  flag.l = 0;
-  flag.n = 0;
-  flag.h = 0;
-  flag.s = 0;
-  flag.f = 0;
-  flag.o = 0;
+void OffOptions() {
+  flag.e = OFF;
+  flag.i = OFF;
+  flag.v = OFF;
+  flag.c = OFF;
+  flag.l = OFF;
+  flag.n = OFF;
+  flag.h = OFF;
+  flag.s = OFF;
+  flag.f = OFF;
+  flag.o = OFF;
 
-  lines.linesCount = 0;
-  lines.filesCount = 0;
-  lines.emptyLines = 0;
-  lines.eCount = 0;
+  lines.linesCount = OFF;
+  lines.filesCount = OFF;
+  lines.emptyLines = OFF;
+  lines.eCount = OFF;
 }
 
 #endif  // SRC_GREP_S21_GREP_H_
